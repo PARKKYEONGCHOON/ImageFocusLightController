@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.IO.Ports;
 using System.Threading;
 
-namespace blobRun
+namespace WindowsFormsApp5
 {
     public class ClsimageFocusController
     {
@@ -77,7 +77,7 @@ namespace blobRun
                     string strCount = count.ToString("X2");
                     string strValue = nValue.ToString("X2");
 
-                    string message = STX + V + W + strChannel + strCount + strValue + CR + LF;
+                    string message = "\x02" + "\x56" + "\x57" + strChannel + strCount + strValue + "\x0D" + "\x0A";
                     _serialPort.Write(message);
 
                     Thread.Sleep(100);
@@ -111,7 +111,7 @@ namespace blobRun
                         strData += (OnOff ? chOn : chOff).ToString("X2");
                     }
 
-                    message = STX + O + W + strChannel + strCount + strData + CR + LF;
+                    message = "\x02" + "\x4F" + "\x57" + strChannel + strCount + strData + "\x0D" + "\x0A";
                     _serialPort.Write(message);
 
                     Thread.Sleep(100);
@@ -140,7 +140,7 @@ namespace blobRun
 
                     strData += (OnOff ? chOn : chOff).ToString("X2");
 
-                    message = STX + O + W + strChannel + strCount + strData + CR + LF;
+                    message = "\x02" + "\x4F" + "\x57" + strChannel + strCount + strData + "\x0D" + "\x0A";
                     _serialPort.Write(message);
 
                     Thread.Sleep(100);
